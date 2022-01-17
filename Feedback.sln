@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feedback", "Feedback\Feedba
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feedback_DAL", "Feedback_DAL\Feedback_DAL.csproj", "{F848C702-4211-4F0B-B085-7FE2F92A159A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Feedback_Service", "Feedback_Service\Feedback_Service.csproj", "{59EC911F-63E0-44D3-AF52-56382420E67E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F848C702-4211-4F0B-B085-7FE2F92A159A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F848C702-4211-4F0B-B085-7FE2F92A159A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F848C702-4211-4F0B-B085-7FE2F92A159A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59EC911F-63E0-44D3-AF52-56382420E67E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59EC911F-63E0-44D3-AF52-56382420E67E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59EC911F-63E0-44D3-AF52-56382420E67E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59EC911F-63E0-44D3-AF52-56382420E67E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

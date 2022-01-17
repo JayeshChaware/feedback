@@ -10,7 +10,7 @@ namespace Feedback_DAL.Data
     {
         public UsersDbContext(DbContextOptions options) : base(options) { }
         public DbSet<User> Users { get; set; }
-        public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<FeedbackRating> Feedbacks { get; set; }
         public DbSet<Product> Products { get; set; }
     }
 }

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Feedback_DAL.Models
 {
-    public class Feedback
+    public class FeedbackRating
     {
         [Key]
         public int Id { get; set; }

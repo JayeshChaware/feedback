@@ -1,4 +1,6 @@
 using Feedback_DAL.Data;
+using Feedback_Service.Interface;
+using Feedback_Service.Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -29,6 +31,9 @@ namespace Feedback
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Default"));
             });
+            services.AddTransient<IUser, UserRepository>();
+            services.AddTransient<IProduct, ProductRepository>();
+            services.AddTransient<IFeedback, FeedbackRepository>();
             services.AddControllersWithViews();
         }
 

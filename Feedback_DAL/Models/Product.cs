@@ -17,6 +17,6 @@ namespace Feedback_DAL.Models
         [Required]
         [MaxLength(500)]
         public string Description { get; set; }
-        public List<Feedback> Feedbacks = new List<Feedback>();
+        public List<FeedbackRating> Feedbacks = new List<FeedbackRating>();
     }
 }
