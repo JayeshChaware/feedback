@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Text;
 
 namespace Feedback_DAL.Models
@@ -9,7 +10,7 @@ namespace Feedback_DAL.Models
     {
         [Key]
         public int Id { get; set; }
-
+      
         [Required]
         [MaxLength(50)]
         public string Name { get; set; }
@@ -17,6 +18,7 @@ namespace Feedback_DAL.Models
         [Required]
         [MaxLength(500)]
         public string Description { get; set; }
-        public List<FeedbackRating> Feedbacks = new List<FeedbackRating>();
+
+        public virtual User User { get; set; }
     }
 }

@@ -21,7 +21,16 @@ namespace Feedback_Service.Repository
             _usersDbContext.SaveChanges();
         }
 
-        public void DeleteProductById(int id)
+        public bool Any(int? Id)
+        {
+            if (_usersDbContext.Products.Any(x => x.Id == Id))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void DeleteProductById(int? id)
         {
             Product temp = _usersDbContext.Products.Find(id);
             _usersDbContext.Products.Remove(temp);
@@ -33,7 +42,7 @@ namespace Feedback_Service.Repository
             return _usersDbContext.Products.ToList();
         }
 
-        public Product GetProductById(int id)
+        public Product GetProductById(int? id)
         {
             return _usersDbContext.Products.FirstOrDefault(p => p.Id == id);
 

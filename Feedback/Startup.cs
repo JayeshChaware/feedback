@@ -34,6 +34,7 @@ namespace Feedback
             services.AddTransient<IUser, UserRepository>();
             services.AddTransient<IProduct, ProductRepository>();
             services.AddTransient<IFeedback, FeedbackRepository>();
+            services.AddTransient<IAddress, AddressRepository>();
             services.AddControllersWithViews();
         }
 

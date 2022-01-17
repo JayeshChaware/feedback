@@ -21,7 +21,16 @@ namespace Feedback_Service.Repository
             _usersDbContext.SaveChanges();
         }
 
-        public void DeleteFeedbackById(int id)
+        public bool Any(int? Id)
+        {
+            if (_usersDbContext.Feedbacks.Any(x => x.Id == Id))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public void DeleteFeedbackById(int? id)
         {
             FeedbackRating temp=_usersDbContext.Feedbacks.Find(id);
             _usersDbContext.Feedbacks.Remove(temp);
@@ -31,7 +40,14 @@ namespace Feedback_Service.Repository
 
         public IEnumerable<FeedbackRating> GetAllFeedbacks()
         {
+            
             return _usersDbContext.Feedbacks.ToList();
+        }
+
+        public FeedbackRating GetFeedbackById(int? id)
+        {
+            FeedbackRating temp = _usersDbContext.Feedbacks.Find(id);
+            return temp;
         }
 
         public void UpdateFeedback(FeedbackRating feedback)

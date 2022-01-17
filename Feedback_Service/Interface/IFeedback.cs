@@ -7,10 +7,12 @@ namespace Feedback_Service.Interface
 {
     public interface IFeedback
     {
-        void AddFeedback(FeedbackRating feedback);
-        IEnumerable<FeedbackRating> GetAllFeedbacks();
-        void DeleteFeedbackById(int id);
+        public void AddFeedback(FeedbackRating feedback);
+        public IEnumerable<FeedbackRating> GetAllFeedbacks();
+        public FeedbackRating GetFeedbackById(int? id);
+        void DeleteFeedbackById(int? id);
         void UpdateFeedback(FeedbackRating feedback);
+        bool Any(int? Id);
 
     }
 }

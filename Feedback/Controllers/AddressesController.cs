@@ -11,23 +11,23 @@ using Feedback_Service.Interface;
 
 namespace Feedback.Controllers
 {
-    public class FeedbackRatingsController : Controller
+    public class AddressesController : Controller
     {
-        private readonly IFeedback _feedback;
+        private readonly IAddress _address;
 
-
-        public FeedbackRatingsController(IFeedback context)
+        public AddressesController(IAddress context)
         {
-            _feedback = context;
+            _address = context;
         }
 
-        // GET: FeedbackRatings
-        public IActionResult Index()
+        // GET: Addresses
+        public IActionResult Index(int? id)
         {
-            return View();
+            Address result = _address.GetAddressByID(id);
+            return View(result);
         }
 
-        // GET: FeedbackRatings/Details/5
+        // GET: Addresses/Details/5
         public IActionResult Details(int? id)
         {
             if (id == null)
@@ -35,37 +35,37 @@ namespace Feedback.Controllers
                 return NotFound();
             }
 
-            var feedbackRating = _feedback.GetFeedbackById(id);
-            if (feedbackRating == null)
+            var address = _address.GetAddressByID(id);
+            if (address == null)
             {
                 return NotFound();
             }
 
-            return View(feedbackRating);
+            return View(address);
         }
 
-        // GET: FeedbackRatings/Create
+        // GET: Addresses/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: FeedbackRatings/Create
+        // POST: Addresses/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,UserId,ProductId,Rating,Comment")] FeedbackRating feedbackRating)
+        public IActionResult Create([Bind("ID,AddressLineOne,AddressLineTwo,City,State,Country,Pincode")] Address address)
         {
             if (ModelState.IsValid)
             {
-                _feedback.AddFeedback(feedbackRating);               
+                _address.AddAddress(address);
                 return RedirectToAction(nameof(Index));
             }
-            return View(feedbackRating);
+            return View(address);
         }
 
-        // GET: FeedbackRatings/Edit/5
+        // GET: Addresses/Edit/5
         public IActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace Feedback.Controllers
                 return NotFound();
             }
 
-            var feedbackRating = _feedback.GetFeedbackById(id);
-            if (feedbackRating == null)
+            var address = _address.GetAddressByID(id);
+            if (address == null)
             {
                 return NotFound();
             }
-            return View(feedbackRating);
+            return View(address);
         }
 
-        // POST: FeedbackRatings/Edit/5
+        // POST: Addresses/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Id,UserId,ProductId,Rating,Comment")] FeedbackRating feedbackRating)
+        public IActionResult Edit(int id, [Bind("ID,AddressLineOne,AddressLineTwo,City,State,Country,Pincode")] Address address)
         {
-            if (id != feedbackRating.Id)
+            if (id != address.ID)
             {
                 return NotFound();
             }
@@ -97,11 +97,11 @@ namespace Feedback.Controllers
             {
                 try
                 {
-                    _feedback.UpdateFeedback(feedbackRating);                    
+                    _address.UpdateAddress(address);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FeedbackRatingExists(feedbackRating.Id))
+                    if (!AddressExists(address.ID))
                     {
                         return NotFound();
                     }
@@ -112,10 +112,10 @@ namespace Feedback.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(feedbackRating);
+            return View(address);
         }
 
-        // GET: FeedbackRatings/Delete/5
+        // GET: Addresses/Delete/5
         public IActionResult Delete(int? id)
         {
             if (id == null)
@@ -123,27 +123,27 @@ namespace Feedback.Controllers
                 return NotFound();
             }
 
-            var feedbackRating = _feedback.GetFeedbackById(id);
-            if (feedbackRating == null)
+            var address = _address.GetAddressByID(id);
+            if (address == null)
             {
                 return NotFound();
             }
 
-            return View(feedbackRating);
+            return View(address);
         }
 
-        // POST: FeedbackRatings/Delete/5
+        // POST: Addresses/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteConfirmed(int id)
         {
-            _feedback.DeleteFeedbackById(id);
+            _address.DeleteAddressByID(id);
             return RedirectToAction(nameof(Index));
         }
 
-        private bool FeedbackRatingExists(int id)
+        private bool AddressExists(int id)
         {
-            return _feedback.Any(id);
+            return _address.Any(id);
         }
     }
 }

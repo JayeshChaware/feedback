@@ -21,14 +21,14 @@ namespace Feedback.Controllers
         }
 
         // GET: Users
-        public IActionResult Index(int id)
+        public IActionResult Index(int? id)
         {
             User result = _user.GetUserByID(id);
             return View(result);
         }
 
         // GET: Users/Details/5
-        public IActionResult Details(int id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -55,7 +55,7 @@ namespace Feedback.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("ID,FirstName,LastName,Gender,Email,Password")] User user)
+        public IActionResult Create([Bind("ID,FirstName,LastName,Gender,Email,AddressId,Password")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace Feedback.Controllers
         }
 
         // GET: Users/Edit/5
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -86,7 +86,7 @@ namespace Feedback.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("ID,FirstName,LastName,Gender,Email,Password")] User user)
+        public IActionResult Edit(int id, [Bind("ID,FirstName,LastName,Gender,Email,AddressId,Password")] User user)
         {
             if (id != user.ID)
             {
@@ -116,7 +116,7 @@ namespace Feedback.Controllers
         }
 
         // GET: Users/Delete/5
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -135,7 +135,7 @@ namespace Feedback.Controllers
         // POST: Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async IActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
             var user = _user.GetUserByID(id);
             _user.DeleteUserByID(id);
@@ -144,7 +144,7 @@ namespace Feedback.Controllers
 
         private bool UserExists(int id)
         {
-            return _user.Use.Any(e => e.ID == id);
+            return _user.Any(id);
         }
     }
 }

@@ -7,34 +7,53 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Feedback_DAL.Data;
 using Feedback_DAL.Models;
+using Feedback_Service.Interface;
 
 namespace Feedback.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly UsersDbContext _context;
+        private readonly IProduct _product;
 
-        public ProductsController(UsersDbContext context)
+        public ProductsController(IProduct context)
         {
-            _context = context;
+            _product = context;
         }
 
         // GET: Products
-        public async Task<IActionResult> Index()
+        public IActionResult Index(string search, string sortOrder, string delete)
         {
-            return View(await _context.Products.ToListAsync());
-        }
+            List<Product> result = _product.GetAllProduct().ToList();
 
-        // GET: Products/Details/5
-        public async Task<IActionResult> Details(int? id)
+            ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+
+            if (sortOrder == "Date")
+            {
+                result = result.OrderByDescending(x => x.Id).ToList();
+            }
+
+            if (search != null)
+            {
+                result = result.Where(x => x.Name.Contains(search)).ToList();
+            }
+
+            if (delete != null)
+            {
+                int deleteid = Convert.ToInt32(delete);
+                DeleteConfirmed(deleteid);
+            }
+            List<Product> newresult = _product.GetAllProduct().ToList();
+            return View(newresult);
+        }
+            // GET: Products/Details/5
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = _product.GetProductById(id);
             if (product == null)
             {
                 return NotFound();
@@ -54,26 +73,25 @@ namespace Feedback.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Description")] Product product)
+        public IActionResult Create([Bind("Id,Name,Description")] Product product)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
-                await _context.SaveChangesAsync();
+                _product.AddProduct(product);
                 return RedirectToAction(nameof(Index));
             }
             return View(product);
         }
 
         // GET: Products/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products.FindAsync(id);
+            var product = _product.GetProductById(id);
             if (product == null)
             {
                 return NotFound();
@@ -86,7 +104,7 @@ namespace Feedback.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Description")] Product product)
+        public IActionResult Edit(int id, [Bind("Id,Name,Description")] Product product)
         {
             if (id != product.Id)
             {
@@ -97,8 +115,7 @@ namespace Feedback.Controllers
             {
                 try
                 {
-                    _context.Update(product);
-                    await _context.SaveChangesAsync();
+                    _product.UpdateProduct(product);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -117,15 +134,14 @@ namespace Feedback.Controllers
         }
 
         // GET: Products/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var product = await _context.Products
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var product = _product.GetProductById(id);
             if (product == null)
             {
                 return NotFound();
@@ -137,17 +153,15 @@ namespace Feedback.Controllers
         // POST: Products/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var product = await _context.Products.FindAsync(id);
-            _context.Products.Remove(product);
-            await _context.SaveChangesAsync();
+             _product.DeleteProductById(id);
             return RedirectToAction(nameof(Index));
         }
 
         private bool ProductExists(int id)
         {
-            return _context.Products.Any(e => e.Id == id);
+            return _product.Any(id);
         }
     }
 }

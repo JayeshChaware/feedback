@@ -8,32 +8,32 @@ using System.Text;
 
 namespace Feedback_Service.Repository
 {
-    public class UserRepository : IUser
+    public class AddressRepository : IAddress
     {
         private readonly UsersDbContext _usersDbContext;
-        public UserRepository(UsersDbContext context)
+        public AddressRepository(UsersDbContext context)
         {
             _usersDbContext = context;
         }
-        public void AddUser(User user)
+        public void AddAddress(Address address)
         {
-            _usersDbContext.Users.Add(user);
+            _usersDbContext.Addresses.Add(address);
             _usersDbContext.SaveChanges();
         }
 
         public bool Any(int? Id)
         {
-            if (_usersDbContext.Users.Any(x => x.ID == Id))
+            if (_usersDbContext.Addresses.Any(x => x.ID == Id))
             {
                 return true;
             }
             return false;
         }
 
-        public void DeleteUserByID(int? id)
+        public void DeleteAddressByID(int? id)
         {
-            User temp = _usersDbContext.Users.Find(id);    
-            _usersDbContext.Users.Remove(temp);
+            Address temp = _usersDbContext.Addresses.Find(id);
+            _usersDbContext.Addresses.Remove(temp);
             _usersDbContext.SaveChanges();
         }
 
@@ -43,14 +43,14 @@ namespace Feedback_Service.Repository
             GC.SuppressFinalize(this);
         }
 
-        public User GetUserByID(int? id)
+        public Address GetAddressByID(int? id)
         {
-            return _usersDbContext.Users.FirstOrDefault(u => u.ID == id);
+            return _usersDbContext.Addresses.Find(id);
         }
 
-        public void UpdateUser(User user)
+        public void UpdateAddress(Address address)
         {
-            _usersDbContext.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
+            _usersDbContext.Entry(address).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _usersDbContext.SaveChanges();
         }
     }

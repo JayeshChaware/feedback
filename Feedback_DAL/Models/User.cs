@@ -1,7 +1,8 @@
-﻿using System;
+﻿using Feedback_DAL.Enum;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Feedback_DAL.Models
 {
@@ -18,17 +19,22 @@ namespace Feedback_DAL.Models
         public string LastName { get; set; }
 
         [Required]
-        public Enum.Gender Gender { get; set; }
+        public Gender Gender { get; set; }
 
         [Required]
         [MaxLength(30)]
         public string Email { get; set; }
+        
+        public int? AddressId { get; set; }
 
         [Required]
         [MaxLength(30)]
         public string Password { get; set; }
-     
+
+        [ForeignKey("AddressId")]
+        public virtual Address Address { get; set; }
 
         public List<FeedbackRating> Feedbacks = new List<FeedbackRating>();
+        //public List<Product> Products = new List<Product>();
     }
 }

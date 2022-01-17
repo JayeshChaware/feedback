@@ -2579,7 +2579,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
-          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.20"
+          "Microsoft.EntityFrameworkCore.SqlServer": "3.1.21"
         },
         "compile": {
           "bin/placeholder/Feedback_DAL.dll": {}

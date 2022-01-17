@@ -12,5 +12,6 @@ namespace Feedback_DAL.Data
         public DbSet<User> Users { get; set; }
         public DbSet<FeedbackRating> Feedbacks { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Address> Addresses { get; set; }
     }
 }
