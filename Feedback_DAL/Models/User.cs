@@ -27,6 +27,7 @@ namespace Feedback_DAL.Models
         [Required]
         [MaxLength(30)]
         public string Password { get; set; }
+     
 
         public List<FeedbackRating> Feedbacks = new List<FeedbackRating>();
     }

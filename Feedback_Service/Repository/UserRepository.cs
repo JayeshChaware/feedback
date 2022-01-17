@@ -21,6 +21,15 @@ namespace Feedback_Service.Repository
             _usersDbContext.SaveChanges();
         }
 
+        public bool Any(int Id)
+        {
+            if (_usersDbContext.Users.Any(x => x.ID == Id))
+            {
+                return true;
+            }
+            return false;
+        }
+
         public void DeleteUserByID(int id)
         {
             User temp = _usersDbContext.Users.Find(id);    
