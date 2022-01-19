@@ -15,11 +15,13 @@ namespace Feedback_Service.Repository
         {
             _usersDbContext = context;
         }
-        public void AddUser(User user)
+        public int AddUser(User user)
         {
             _usersDbContext.Users.Add(user);
             _usersDbContext.SaveChanges();
+            return user.ID;
         }
+
 
         public bool Any(int? Id)
         {
@@ -43,9 +45,23 @@ namespace Feedback_Service.Repository
             GC.SuppressFinalize(this);
         }
 
+        public IEnumerable<User> GetAllUser()
+        {
+            return _usersDbContext.Users.ToList();
+        }
+
         public User GetUserByID(int? id)
         {
-            return _usersDbContext.Users.FirstOrDefault(u => u.ID == id);
+           // if (id.HasValue)
+            //{
+               // List<User> temp = new List<User>();
+                //temp.Add(_usersDbContext.Users.FirstOrDefault(u => u.ID == id));
+                return _usersDbContext.Users.FirstOrDefault(u => u.ID == id);
+            //}
+            //else
+            //{
+             //   return _usersDbContext.Users.ToList();
+            //}
         }
 
         public void UpdateUser(User user)
@@ -53,5 +69,7 @@ namespace Feedback_Service.Repository
             _usersDbContext.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _usersDbContext.SaveChanges();
         }
+
+       
     }
 }

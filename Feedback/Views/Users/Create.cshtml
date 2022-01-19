@@ -1,4 +1,4 @@
-﻿@model Feedback_DAL.Models.User
+﻿@model Feedback_DAL.ViewModels.UserCreateViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -23,17 +23,52 @@
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Gender" class="control-label"></label>
+                <label asp-for="Gender" class="control-label"></label><br>
                 <label asp-for="Gender" class="control-label">Male</label>
                 @Html.RadioButtonFor(m => m.Gender, "Male")
                 <label asp-for="Gender" class="control-label">Female</label>
                 @Html.RadioButtonFor(m => m.Gender, "Female")
                 <label asp-for="Gender" class="control-label">Other</label>
                 @Html.RadioButtonFor(m => m.Gender, "Other")
-
-
                 <span asp-validation-for="Gender" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label asp-for="AddressLineOne" class="control-label"></label>
+                <input asp-for="AddressLineOne" class="form-control" />
+                <span asp-validation-for="AddressLineOne" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="AddressLineTwo" class="control-label"></label>
+                <input asp-for="AddressLineTwo" class="form-control" />
+                <span asp-validation-for="AddressLineTwo" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="City" class="control-label"></label>
+                <input asp-for="City" class="form-control" />
+                <span asp-validation-for="City" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="State" class="control-label"></label>
+                <input asp-for="State" class="form-control" />
+                <span asp-validation-for="State" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Country" class="control-label"></label>
+                <input asp-for="Country" class="form-control" />
+                <span asp-validation-for="Country" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Pincode" class="control-label"></label>
+                <input asp-for="Pincode" class="form-control" />
+                <span asp-validation-for="Pincode" class="text-danger"></span>
+            </div>
+
             <div class="form-group">
                 <label asp-for="Email" class="control-label"></label>
                 <input asp-for="Email" class="form-control" />
@@ -42,9 +77,11 @@
 
             <div class="form-group">
                 <label asp-for="Password" class="control-label"></label>
-                <input asp-for="Password" class="form-control" />
+                <input type="password" asp-for="Password" class="form-control" />
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
+
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

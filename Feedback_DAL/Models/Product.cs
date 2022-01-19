@@ -8,6 +8,10 @@ namespace Feedback_DAL.Models
 {
     public class Product
     {
+        public Product()
+        {
+            FeedbackRatings = new HashSet<FeedbackRating>();
+        }
         [Key]
         public int Id { get; set; }
       
@@ -20,5 +24,7 @@ namespace Feedback_DAL.Models
         public string Description { get; set; }
 
         public virtual User User { get; set; }
+        [InverseProperty("Product")]
+        public virtual ICollection<FeedbackRating> FeedbackRatings { get; set; }
     }
 }

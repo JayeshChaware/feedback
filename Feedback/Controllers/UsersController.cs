@@ -8,23 +8,27 @@ using Microsoft.EntityFrameworkCore;
 using Feedback_DAL.Data;
 using Feedback_DAL.Models;
 using Feedback_Service.Interface;
+using Feedback_DAL.ViewModels;
 
 namespace Feedback.Controllers
 {
     public class UsersController : Controller
     {
         private readonly IUser _user;
+        private readonly IAddress _address;
 
-        public UsersController(IUser context)
+        public UsersController(IUser userContext, IAddress addressContext)
         {
-            _user = context;
+            _user = userContext;
+            _address = addressContext;
         }
 
+
         // GET: Users
-        public IActionResult Index(int? id)
+        public IActionResult Index(string search, string sortOrder, string delete)
         {
-            User result = _user.GetUserByID(id);
-            return View(result);
+            List<User> newresult = _user.GetAllUser().ToList();
+            return View(newresult);
         }
 
         // GET: Users/Details/5
@@ -35,13 +39,30 @@ namespace Feedback.Controllers
                 return NotFound();
             }
 
-            User result = _user.GetUserByID(id);
-            if (result == null)
+            User userResult = _user.GetUserByID(id);
+            Address addressResult = _address.GetAddressByID(userResult.AddressId);
+            if (userResult == null && addressResult == null)
             {
                 return NotFound();
             }
 
-            return View(result);
+            UserCreateViewModel userVm = new UserCreateViewModel()
+            {
+                AddressLineOne = addressResult.AddressLineOne,
+                AddressLineTwo = addressResult.AddressLineTwo,
+                City = addressResult.City,
+                State = addressResult.State,
+                Country = addressResult.Country,
+                Pincode = addressResult.Pincode,
+           
+                FirstName = userResult.FirstName,
+                LastName = userResult.LastName,
+                Gender = userResult.Gender,
+                Email = userResult.Email,
+               
+            };
+
+            return View(userVm);
         }
 
         // GET: Users/Create
@@ -55,14 +76,33 @@ namespace Feedback.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("ID,FirstName,LastName,Gender,Email,AddressId,Password")] User user)
+        public IActionResult Create([Bind("FirstName,LastName,Gender,Email,Password,AddressLineOne,AddressLineTwo,City,State,Country,Pincode")] UserCreateViewModel userVm)
         {
-            if (ModelState.IsValid)
+            Address address = new Address
             {
-                _user.AddUser(user);
-                return RedirectToAction(nameof(Index));
-            }
-            return View(user);
+                AddressLineOne = userVm.AddressLineOne,
+                AddressLineTwo = userVm.AddressLineTwo,
+                City = userVm.City,
+                State = userVm.State,
+                Country = userVm.Country,
+                Pincode = userVm.Pincode
+            };
+            _address.AddAddress(address);
+            User user = new User
+            {
+                FirstName = userVm.FirstName,
+                LastName = userVm.LastName,
+                Gender = userVm.Gender,
+                Email = userVm.Email,
+                AddressId = address.ID,
+                Password = userVm.Password
+            };
+
+
+            _user.AddUser(user);
+            return RedirectToAction(nameof(Index));
+
+            //return View(userVm);
         }
 
         // GET: Users/Edit/5
@@ -138,6 +178,7 @@ namespace Feedback.Controllers
         public IActionResult DeleteConfirmed(int id)
         {
             var user = _user.GetUserByID(id);
+            _address.DeleteAddressByID(user.AddressId);
             _user.DeleteUserByID(id);
             return RedirectToAction(nameof(Index));
         }

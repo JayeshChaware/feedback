@@ -1,6 +1,7 @@
 ﻿using Feedback_DAL.Data;
 using Feedback_DAL.Models;
 using Feedback_Service.Interface;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,7 +40,7 @@ namespace Feedback_Service.Repository
 
         public IEnumerable<Product> GetAllProduct()
         {
-            return _usersDbContext.Products.ToList();
+            return _usersDbContext.Products.Include(x => x.FeedbackRatings).ToList();
         }
 
         public Product GetProductById(int? id)

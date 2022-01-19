@@ -7,9 +7,10 @@ namespace Feedback_Service.Interface
 {
     public interface IUser : IDisposable
     {
-        public void AddUser(User user);
+        public int AddUser(User user);
         public User GetUserByID(int? id);
         public void DeleteUserByID(int? id);
+        IEnumerable<User> GetAllUser();
         void UpdateUser(User user);
         bool Any(int? Id);
     }

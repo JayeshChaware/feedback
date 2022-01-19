@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Feedback_DAL.Data;
 using Feedback_DAL.Models;
 using Feedback_Service.Interface;
+using Feedback_DAL.ViewModels;
 
 namespace Feedback.Controllers
 {
@@ -43,6 +44,7 @@ namespace Feedback.Controllers
                 DeleteConfirmed(deleteid);
             }
             List<Product> newresult = _product.GetAllProduct().ToList();
+            
             return View(newresult);
         }
             // GET: Products/Details/5

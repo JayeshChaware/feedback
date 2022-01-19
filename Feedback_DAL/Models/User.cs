@@ -32,7 +32,7 @@ namespace Feedback_DAL.Models
         public string Password { get; set; }
 
         [ForeignKey("AddressId")]
-        public virtual Address Address { get; set; }
+        public virtual Address Address { get; set; }//fot 1-1
 
         public List<FeedbackRating> Feedbacks = new List<FeedbackRating>();
         //public List<Product> Products = new List<Product>();

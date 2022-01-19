@@ -31,6 +31,7 @@ namespace Feedback
             {
                 options.UseSqlServer(Configuration.GetConnectionString("Default"));
             });
+            services.AddRazorPages();
             services.AddTransient<IUser, UserRepository>();
             services.AddTransient<IProduct, ProductRepository>();
             services.AddTransient<IFeedback, FeedbackRepository>();
@@ -55,6 +56,7 @@ namespace Feedback
             app.UseStaticFiles();
 
             app.UseRouting();
+            app.UseAuthentication();
 
             app.UseAuthorization();
 
@@ -63,6 +65,7 @@ namespace Feedback
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }

@@ -47,7 +47,18 @@ namespace Feedback.Controllers
         // GET: FeedbackRatings/Create
         public IActionResult Create()
         {
-            return View();
+            int? ProductId = 1;
+            if (ProductId == null)
+            {
+
+                return NotFound();
+
+            }
+            FeedbackRating feedbackRating = new FeedbackRating();
+            feedbackRating.UserId = 1;
+            feedbackRating.ProductId = (Int32)ProductId;
+            return View(feedbackRating);
+
         }
 
         // POST: FeedbackRatings/Create
@@ -59,7 +70,7 @@ namespace Feedback.Controllers
         {
             if (ModelState.IsValid)
             {
-                _feedback.AddFeedback(feedbackRating);               
+                _feedback.AddFeedback(feedbackRating);
                 return RedirectToAction(nameof(Index));
             }
             return View(feedbackRating);
@@ -97,7 +108,7 @@ namespace Feedback.Controllers
             {
                 try
                 {
-                    _feedback.UpdateFeedback(feedbackRating);                    
+                    _feedback.UpdateFeedback(feedbackRating);
                 }
                 catch (DbUpdateConcurrencyException)
                 {

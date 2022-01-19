@@ -12,9 +12,22 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="UserId" value="@Model.UserId" hidden>
+            <input asp-for="ProductId" value="@Model.ProductId" hidden>
+
             <div class="form-group">
-                <label asp-for="Rating" class="control-label"></label>
-                <select asp-for="Rating" class="form-control"></select>
+
+                <label asp-for="Rating" class="control-label"></label><br>
+                <label asp-for="Rating" class="control-label">1</label>
+                @Html.RadioButtonFor(m => m.Rating, "OneStar")
+            <label asp-for="Rating" class="control-label">2</label>
+                @Html.RadioButtonFor(m => m.Rating, "TwoStar")
+                <label asp-for="Rating" class="control-label">3</label>
+                @Html.RadioButtonFor(m => m.Rating, "ThreeStar")
+                <label asp-for="Rating" class="control-label">4</label>
+                @Html.RadioButtonFor(m => m.Rating, "FourStar")
+                <label asp-for="Rating" class="control-label">5</label>
+                @Html.RadioButtonFor(m => m.Rating, "FiveStar")
                 <span asp-validation-for="Rating" class="text-danger"></span>
             </div>
             <div class="form-group">

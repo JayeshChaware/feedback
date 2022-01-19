@@ -22,7 +22,7 @@ namespace Feedback_DAL.Models
         public virtual User User { get; set; }
 
         [ForeignKey("ProductId")]
-
+        //[InverseProperty("FeedbackRating")]
         public virtual Product Product { get; set; }
 
     }
