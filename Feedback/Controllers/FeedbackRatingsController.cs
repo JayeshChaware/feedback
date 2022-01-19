@@ -24,7 +24,13 @@ namespace Feedback.Controllers
         // GET: FeedbackRatings
         public IActionResult Index()
         {
-            return View();
+            
+            return View(_feedback.GetAllFeedbacks().ToList());
+        }
+        public IActionResult UserFeedback()
+        {
+
+            return View(_feedback.GetAllFeedbackById(1).ToList());
         }
 
         // GET: FeedbackRatings/Details/5
@@ -45,19 +51,15 @@ namespace Feedback.Controllers
         }
 
         // GET: FeedbackRatings/Create
-        public IActionResult Create()
+        public IActionResult Create(int cid)
         {
-            int? ProductId = 1;
-            if (ProductId == null)
-            {
+            int? UserId = 1;
 
-                return NotFound();
+            ViewBag.ProductId = cid;
+            ViewBag.UserIdValue = (Int32)UserId;
+            
 
-            }
-            FeedbackRating feedbackRating = new FeedbackRating();
-            feedbackRating.UserId = 1;
-            feedbackRating.ProductId = (Int32)ProductId;
-            return View(feedbackRating);
+            return View();
 
         }
 
@@ -68,12 +70,15 @@ namespace Feedback.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Id,UserId,ProductId,Rating,Comment")] FeedbackRating feedbackRating)
         {
+            //var yyy=  feedbackRating.UserId;
+           // var aaa = Request.Form["UserId"];
             if (ModelState.IsValid)
             {
+
                 _feedback.AddFeedback(feedbackRating);
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index","Products");
             }
-            return View(feedbackRating);
+            return RedirectToAction("Products","Index");
         }
 
         // GET: FeedbackRatings/Edit/5
@@ -89,7 +94,8 @@ namespace Feedback.Controllers
             {
                 return NotFound();
             }
-            return View(feedbackRating);
+            //return View(feedbackRating);
+            return RedirectToAction("Products","Index");
         }
 
         // POST: FeedbackRatings/Edit/5

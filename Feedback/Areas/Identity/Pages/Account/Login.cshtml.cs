@@ -18,13 +18,13 @@ namespace Feedback.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly UserManager<Users> _userManager;
-        private readonly SignInManager<Users> _signInManager;
+        private readonly UserManager<FeedbackUser> _userManager;
+        private readonly SignInManager<FeedbackUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<Users> signInManager, 
+        public LoginModel(SignInManager<FeedbackUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<Users> userManager)
+            UserManager<FeedbackUser> userManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;

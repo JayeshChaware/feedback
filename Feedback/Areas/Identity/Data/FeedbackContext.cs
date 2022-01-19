@@ -7,11 +7,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace Feedback_DAL.Data
+namespace Feedback.Data
 {
-    public class UserDbContext : IdentityDbContext<Users>
+    public class FeedbackContext : IdentityDbContext<FeedbackUser>
     {
-        public UserDbContext(DbContextOptions<UserDbContext> options)
+        public FeedbackContext(DbContextOptions<FeedbackContext> options)
             : base(options)
         {
         }

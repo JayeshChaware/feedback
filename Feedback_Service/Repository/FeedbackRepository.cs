@@ -17,7 +17,7 @@ namespace Feedback_Service.Repository
         }
         public void AddFeedback(FeedbackRating feedback)
         {
-            _usersDbContext.Feedbacks.Add(feedback);
+            _usersDbContext.Feedbacks.Add(entity: feedback);
             _usersDbContext.SaveChanges();
         }
 
@@ -44,16 +44,26 @@ namespace Feedback_Service.Repository
             return _usersDbContext.Feedbacks.ToList();
         }
 
-        public FeedbackRating GetFeedbackById(int? id)
+        public IEnumerable<FeedbackRating> GetAllFeedbackById(int? id)
         {
-            FeedbackRating temp = _usersDbContext.Feedbacks.Find(id);
-            return temp;
+            if (id is null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            return _usersDbContext.Feedbacks.Where(x=> x.UserId==id).ToList();
+            
         }
 
         public void UpdateFeedback(FeedbackRating feedback)
         {
             _usersDbContext.Entry(feedback).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _usersDbContext.SaveChanges();
+        }
+
+        public FeedbackRating GetFeedbackById(int? id)
+        {
+            return _usersDbContext.Feedbacks.Find(id);
         }
     }
 }

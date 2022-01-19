@@ -1,8 +1,8 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @using Feedback.Areas.Identity.Data
 
-@inject SignInManager<Users> SignInManager
-@inject UserManager<Users> UserManager
+@inject SignInManager<FeedbackUser> SignInManager
+@inject UserManager<FeedbackUser> UserManager
 
 <ul class="navbar-nav">
 @if (SignInManager.IsSignedIn(User))

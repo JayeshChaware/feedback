@@ -69,7 +69,5 @@ namespace Feedback_Service.Repository
             _usersDbContext.Entry(user).State = Microsoft.EntityFrameworkCore.EntityState.Modified;
             _usersDbContext.SaveChanges();
         }
-
-       
     }
 }

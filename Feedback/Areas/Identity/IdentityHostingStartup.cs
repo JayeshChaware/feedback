@@ -1,6 +1,6 @@
 ﻿using System;
 using Feedback.Areas.Identity.Data;
-using Feedback_DAL.Data;
+using Feedback.Data;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
@@ -16,12 +16,12 @@ namespace Feedback.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<UserDbContext>(options =>
+                services.AddDbContext<FeedbackContext>(options =>
                     options.UseSqlServer(
-                        context.Configuration.GetConnectionString("UserDbContextConnection")));
+                        context.Configuration.GetConnectionString("FeedbackContextConnection")));
 
-                services.AddDefaultIdentity<Users>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<UserDbContext>();
+                services.AddDefaultIdentity<FeedbackUser>(options => options.SignIn.RequireConfirmedAccount = true)
+                    .AddEntityFrameworkStores<FeedbackContext>();
             });
         }
     }

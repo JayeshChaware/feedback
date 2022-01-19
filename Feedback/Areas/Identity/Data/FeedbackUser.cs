@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace Feedback.Areas.Identity.Data
 {
-    // Add profile data for application users by adding properties to the Users class
-    public class Users : IdentityUser
+    // Add profile data for application users by adding properties to the FeedbackUser class
+    public class FeedbackUser : IdentityUser
     {
     }
 }

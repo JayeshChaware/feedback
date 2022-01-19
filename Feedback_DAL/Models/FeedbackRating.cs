@@ -11,6 +11,7 @@ namespace Feedback_DAL.Models
     {
         [Key]
         public int Id { get; set; }
+        [Required]
         public int UserId { get; set; }
         public int ProductId { get; set; }
         [Required]
@@ -25,5 +26,6 @@ namespace Feedback_DAL.Models
         //[InverseProperty("FeedbackRating")]
         public virtual Product Product { get; set; }
 
+        
     }
 }

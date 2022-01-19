@@ -14,10 +14,10 @@ namespace Feedback.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LogoutModel : PageModel
     {
-        private readonly SignInManager<Users> _signInManager;
+        private readonly SignInManager<FeedbackUser> _signInManager;
         private readonly ILogger<LogoutModel> _logger;
 
-        public LogoutModel(SignInManager<Users> signInManager, ILogger<LogoutModel> logger)
+        public LogoutModel(SignInManager<FeedbackUser> signInManager, ILogger<LogoutModel> logger)
         {
             _signInManager = signInManager;
             _logger = logger;

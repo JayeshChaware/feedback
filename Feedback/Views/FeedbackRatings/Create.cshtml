@@ -12,8 +12,8 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input asp-for="UserId" value="@Model.UserId" hidden>
-            <input asp-for="ProductId" value="@Model.ProductId" hidden>
+            <input asp-for="UserId" value="@ViewBag.UserIdValue" hidden>
+            <input asp-for="ProductId" value="@ViewBag.ProductId" hidden>
 
             <div class="form-group">
 
@@ -43,7 +43,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Products" asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
