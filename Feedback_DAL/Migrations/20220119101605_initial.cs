@@ -2,7 +2,7 @@
 
 namespace Feedback_DAL.Migrations
 {
-    public partial class InitialDb : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

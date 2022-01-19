@@ -43,6 +43,16 @@ namespace Feedback_Service.Repository
             return _usersDbContext.Products.Include(x => x.FeedbackRatings).ToList();
         }
 
+     /*   public IEnumerable<Product> GetAllProductById(int? id)
+        {
+            if (id is null)
+            {
+                throw new ArgumentNullException(nameof(id));
+            }
+
+            return _usersDbContext.Products.Where(x => x.UserId == id).ToList();
+        }
+*/
         public Product GetProductById(int? id)
         {
             return _usersDbContext.Products.FirstOrDefault(p => p.Id == id);

@@ -11,6 +11,7 @@ namespace Feedback_Service.Interface
         void DeleteProductById(int? id);
         Product GetProductById(int? id);
         IEnumerable<Product> GetAllProduct();
+        //public IEnumerable<Product> GetAllProductById(int? id);
         void UpdateProduct(Product product);
         bool Any(int? Id);
 

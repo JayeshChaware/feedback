@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Feedback_DAL.Migrations
 {
     [DbContext(typeof(UsersDbContext))]
-    [Migration("20220117131038_InitialDb")]
-    partial class InitialDb
+    [Migration("20220119101605_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -163,7 +163,7 @@ namespace Feedback_DAL.Migrations
             modelBuilder.Entity("Feedback_DAL.Models.FeedbackRating", b =>
                 {
                     b.HasOne("Feedback_DAL.Models.Product", "Product")
-                        .WithMany()
+                        .WithMany("FeedbackRatings")
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

@@ -1,4 +1,5 @@
 ﻿using Feedback_DAL.Enum;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -6,7 +7,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Feedback_DAL.Models
 {
-    public class User
+    public class User/* : IdentityUser*/
     {
         [Key]
         public int ID { get; set; }

@@ -7,7 +7,9 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New</a> |
+    <a asp-controller="Products" asp-action="Create" asp-route-Uid="model.ID">Add Product</a> |
+    <a asp-controller="FeedbackRatingd" asp-action="UserFeedback" asp-route-Uid="model.ID">My Feedback</a> 
 </p>
 <table class="table">
     <thead>

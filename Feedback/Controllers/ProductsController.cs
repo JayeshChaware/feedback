@@ -47,6 +47,7 @@ namespace Feedback.Controllers
             
             return View(newresult);
         }
+
             // GET: Products/Details/5
         public IActionResult Details(int? id)
         {

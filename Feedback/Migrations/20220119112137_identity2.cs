@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Feedback_DAL.Migrations
+namespace Feedback.Migrations
 {
-    public partial class invereProductFeedback : Migration
+    public partial class identity2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
